@@ -1,0 +1,56 @@
+server:
+  port: 8084
+spring:
+  datasource: #数据源配置
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/day17?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=UTC
+    username: root
+    password: 123456
+    druid:
+      max-active: 10
+      min-idle: 5
+      max-wait: 5000
+      initial-size: 5
+      validation-query: select 1
+      stat-view-servlet:
+        enabled: true
+        login-username: admin
+        login-password: admin
+        allow:
+        deny:
+        url-pattern: "/druid/*"
+  thymeleaf:
+    cache: false
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  #redis
+  redis:
+    host: 192.168.0.110
+    password: 123456
+    port: 6390
+    jedis:
+      pool:
+        max-active: 20
+        max-idle: 8
+        min-idle: 0
+shiro:
+  hash-algorithm-name: md5
+  hash-iterations: 2
+  login-url: /index.html
+  unauthorized-url: /unauthorized.html
+  anon-urls:
+    - /**
+    - /index.html*
+    - /login/login*
+    - /resources/**
+  logout-url: /login/logout*
+  authc-urls:
+#    - /**
+
+#mybatisplus的配置
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mapper/*Mapper.xml
+
